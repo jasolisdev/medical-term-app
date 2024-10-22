@@ -1,0 +1,45 @@
+/* General body styling, including font and background color */
+body {
+  font-family: Arial, sans-serif; /* Default font for the body with a fallback to sans-serif */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  background-color: #f5f5f5; /* Set background color to light gray for a soft, neutral appearance */
+}
+
+/* General button styling applied to all buttons */
+button {
+  font-size: 1rem; /* Set the font size of the button text */
+  padding: 10px 20px; /* Add padding to increase button size for better usability */
+  background-color: #007bff; /* Set the button's default background color to blue */
+  color: white; /* Set the text color to white for contrast against the blue background */
+  border: none; /* Remove the default button border */
+  border-radius: 5px; /* Round the corners of the button */
+  cursor: pointer; /* Change the cursor to a pointer to indicate interactivity */
+  transition: background-color 0.3s ease; /* Smooth transition effect for background color when hovered */
+}
+
+/* Button styling when hovered */
+button:hover {
+  background-color: #0056b3; /* Change button background to a darker blue when hovered */
+}
+
+/* Styling for general containers used throughout the application */
+.container {
+  max-width: 800px; /* Limit container width to 800 pixels */
+  margin: auto; /* Center the container horizontally on the page */
+  padding: 20px; /* Add padding inside the container for spacing */
+  background-color: #fff; /* Set container background to white */
+  border-radius: 8px; /* Round the corners of the container for a softer look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to create a lifted effect */
+}
+
+/* Styling for navigation buttons */
+.nav-button {
+  background-color: #28a745; /* Set navigation button background color to green */
+  color: white; /* Set text color to white for contrast against the green background */
+}
+
+/* Styling for navigation buttons on hover */
+.nav-button:hover {
+  background-color: #218838; /* Change navigation button background to a darker green when hovered */
+}
