@@ -6,6 +6,7 @@ const { body, validationResult } = require("express-validator");
 const User = require("./models/Users");
 require("dotenv").config();
 const path = require("path");
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,19 +14,28 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json());
 
+// Configure CORS to allow requests from your client
+app.use(
+  cors({
+    origin: "https://medical-term-app-client.onrender.com", // Replace with your client URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+
 // MongoDB Connection
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// // Serve static files from the build folder
-// app.use("/medical-term-app", express.static(path.join(__dirname, "../build")));
-//
-// // Serve index.html for all requests to support client-side routing
-// app.get("/medical-term-app/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../build", "index.html"));
-// });
+// Serve static files from the build folder
+app.use("/medical-term-app", express.static(path.join(__dirname, "../build")));
+
+// Serve index.html for all requests to support client-side routing
+app.get("/medical-term-app/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
+});
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Medical Term App API");
