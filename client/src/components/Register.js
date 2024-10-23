@@ -29,6 +29,7 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showPin, setShowPin] = useState(false);
   const navigate = useNavigate();
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,7 +56,7 @@ const Register = () => {
     }
 
     try {
-      await axios.post("/api/register", formData);
+      await axios.post(`${apiUrl}/api/register`, formData);
       navigate("/login"); // Redirect to login after successful registration
     } catch (error) {
       const errorMsg =

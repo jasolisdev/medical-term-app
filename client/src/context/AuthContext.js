@@ -13,13 +13,18 @@ export const AuthProvider = ({ children }) => {
   const [isAuthInitialized, setIsAuthInitialized] = useState(false);
   const navigate = useNavigate();
 
+  // Get the API URL from the environment variable
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const validateToken = async () => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          // Call an API to validate the token
-          const res = await axios.post("/api/validate-token", { token });
+          // Call the backend API to validate the token
+          const res = await axios.post(`${apiUrl}/api/validate-token`, {
+            token,
+          });
 
           if (res.data.valid) {
             setIsAuthenticated(true);
@@ -40,7 +45,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     validateToken();
-  }, [navigate]);
+  }, [navigate, apiUrl]);
 
   const login = (token) => {
     try {

@@ -30,8 +30,9 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const [usePin, setUsePin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [flashError, setFlashError] = useState(false); // State for flashing red circles
+  const [flashError, setFlashError] = useState(false);
   const { login } = useAuth(); // Get login function from context
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -56,7 +57,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "/api/login",
+        `${apiUrl}/api/login`,
         usePin ? { username: formData.username, pin: formData.pin } : formData,
       );
       login(res.data.token); // Set authentication and save token
@@ -155,7 +156,7 @@ const Login = () => {
                       size="10px"
                       bg={
                         flashError
-                          ? "red.500" // The color of the flashing circles when there's an error
+                          ? "red.500"
                           : formData.pin.length > idx
                             ? "teal"
                             : "gray.300"
@@ -174,10 +175,10 @@ const Login = () => {
                       <Button
                         colorScheme="teal"
                         onClick={() => handlePinInput(value)}
-                        width="70px" // Adjusted for circular shape
-                        height="70px" // Adjusted for circular shape
-                        borderRadius="full" // Make buttons circular
-                        fontSize="2xl" // Increased font size for better visibility
+                        width="70px"
+                        height="70px"
+                        borderRadius="full"
+                        fontSize="2xl"
                       >
                         {value}
                       </Button>
